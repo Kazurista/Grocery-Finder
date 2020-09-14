@@ -1,0 +1,22 @@
+{
+  "name": "rakuten-recipie-backend",
+  "version": "1.0.0",
+  "description": "It will help RAKUTEN RECIPE users to buy an ingredients from RAKUTEN ICHIBA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kazurista/Grocery-Finder.git"
+  },
+  "author": "FresheR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kazurista/Grocery-Finder/issues"
+  },
+  "homepage": "https://github.com/Kazurista/Grocery-Finder#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
