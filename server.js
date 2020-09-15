@@ -7,6 +7,7 @@ const httpRequest = require('./httpRequest');
 const mongoose = require('mongoose');
 const User = require('./models/user');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -30,7 +31,6 @@ const authenticate = (req, res, next) => {
     }
     next();
 };
-
 
 //get request to get Recipie Catagory 
 app.get('/api/recipie-catagory-list', authenticate, (req, res) => {
@@ -148,6 +148,53 @@ app.post('/api/user/signup', (req, res, next) => {
             })
         });
 });
+
+
+app.post('/api/user/login', (req, res, next) => {
+    User.find({ username: req.body.username })
+        .exec()
+        .then(user => {
+            if (user.length < 1) {
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
+            }
+            bcrypt.compare(req.body.password, user[0].password)
+                .then(result => {
+                    if (result) {
+                        const token = jwt.sign({
+                            username: user[0].username,
+                            userId: user[0]._id
+                        },
+                            config.authentication.key,
+                            {
+                                expiresIn: '30m'
+                            });
+                        return res.status(200).json({
+                            message: 'Auth successful',
+                            token: token
+                        });
+                    } else {
+                        return res.status(401).json({
+                            message: 'Auth failed',
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    return res.status(401).json({
+                        message: 'Auth failed'
+                    })
+                });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
 
 const port = process.env.PORT || config.app.port;
 
