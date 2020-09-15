@@ -17,7 +17,10 @@ const getRecipieCatagoryList = () => (new Promise((resolve, reject) => {
         if (!error && (response && response.statusCode === 200) ) {
 
             const recipieCatagoryList = body ? JSON.parse(body) : [];
-            resolve(recipieCatagoryList);
+            const recipielarge = recipieCatagoryList['result']['large']
+            resolve(recipielarge);
+            console.log(Object.keys(recipielarge).length);
+            console.log(recipielarge[0]['categoryName'])
         } else {
             if (error) {
                 reject(error);
@@ -41,9 +44,9 @@ const getRecipieCatagoryRanking = () => (new Promise((resolve, reject) => {
         if (!error && (response && response.statusCode === 200) ) {
             
             const recipieCatagoryRanking  = body ? JSON.parse(body) : [];
-            
-           
-            resolve(recipieCatagoryRanking);
+            const recipieCatagoryRankingResult = recipieCatagoryRanking['result'];
+            resolve(recipieCatagoryRankingResult);
+            console.log(recipieCatagoryRankingResult[0]['recipeTitle']);
         } else {
             if (error) {
                 reject(error);
@@ -68,9 +71,10 @@ const getItem = () => (new Promise((resolve, reject) => {
        if (!error && (response && response.statusCode === 200) ) {
            
            const itemList  = body ? JSON.parse(body) : [];
-           
-          
-           resolve(itemList);
+           const itemListItems = itemList['Items'];
+           resolve(itemListItems);
+           console.log(itemList['hits']);
+           console.log(itemListItems[0]['Item']['itemName']);
        } else {
            if (error) {
                reject(error);
@@ -94,4 +98,6 @@ module.exports = {
     getRecipieCatagoryList,
     getRecipieCatagoryRanking,
     getItem
-};
+}
+
+console.log(typeof(getItem()))
