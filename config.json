@@ -1,6 +1,6 @@
 {
   "app": {
-    "port": 8080
+    "port": 8000
   },
   "url": {
     "recipie": "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&applicationId=1013628348561559421&categoryType=large",
