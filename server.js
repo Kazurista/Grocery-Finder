@@ -24,12 +24,18 @@ mongoose.connect('mongodb+srv://admin:ntMpb3yLMRHIRYxO@cluster0.xkcpi.mongodb.ne
 
 //authentication
 
-const authenticate = (req, res, next) => {
-    if (req.headers[config.authentication.headerName] !== config.authentication.key) {
-        res.status(401).send();
-        return;
+const authenticate =  (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        console.log(token);
+        const decoded = jwt.verify(token, config.authentication.key);
+        req.userData = decoded;
+        next();
+    } catch (err) {
+        return res.status(401).json({
+            message: 'Auth failed'
+        })
     }
-    next();
 };
 
 //get request to get Recipie Catagory 
