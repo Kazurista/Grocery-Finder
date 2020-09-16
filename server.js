@@ -20,6 +20,15 @@ mongoose.connect('mongodb+srv://admin:ntMpb3yLMRHIRYxO@cluster0.xkcpi.mongodb.ne
     useNewUrlParser: true
 })
 
+app.use((req,res,next)=>{
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+    if(req.method === "OPTIONS"){
+        res.header("Access-Control-Allow-Methods","PUT, POST, PATCH, DELETE, GET")
+        return res.status(200).json({});
+    }
+    next();
+});
 //authentication
 
 const authenticate =  (req, res, next) => {
