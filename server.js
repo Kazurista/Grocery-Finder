@@ -14,11 +14,15 @@ app.use(bodyParser.json());
 const UserController = require('./controllers/user');
 const bcrypt = require('bcrypt');
 
-
-mongoose.connect('mongodb+srv://admin:ntMpb3yLMRHIRYxO@cluster0.xkcpi.mongodb.net/userDb?retryWrites=true&w=majority', {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-})
+try{
+    mongoose.connect('mongodb+srv://admin:ntMpb3yLMRHIRYxO@cluster0.xkcpi.mongodb.net/userDb?retryWrites=true&w=majority', {
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    });
+    console.log("Database Connected Successfully!")
+} catch(err){
+    console.log(err);
+}
 
 //authentication
 
@@ -105,6 +109,11 @@ app.post('/api/user', (req, res) => {
 app.post('/api/user/signup',UserController.user_signup);
 
 app.post('/api/user/login', UserController.user_login);
+
+//Recipe History Functions
+app.use(express.json({extended:false}));
+app.use('/api/addRecipe', require('./addRecipe'));
+app.use('/api/findRecipe', require('./findRecipe'));
 
 
 const port = process.env.PORT || config.app.port;

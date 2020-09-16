@@ -19,8 +19,8 @@ const getRecipieCatagoryList = () => (new Promise((resolve, reject) => {
             const recipieCatagoryList = body ? JSON.parse(body) : [];
             const recipielarge = recipieCatagoryList['result']['large']
             resolve(recipielarge);
-            console.log(Object.keys(recipielarge).length);
-            console.log(recipielarge[0]['categoryName'])
+            //console.log(Object.keys(recipielarge).length);
+            //console.log(recipielarge[0]['categoryName'])
         } else {
             if (error) {
                 reject(error);
@@ -46,7 +46,7 @@ const getRecipieCatagoryRanking = () => (new Promise((resolve, reject) => {
             const recipieCatagoryRanking  = body ? JSON.parse(body) : [];
             const recipieCatagoryRankingResult = recipieCatagoryRanking['result'];
             resolve(recipieCatagoryRankingResult);
-            console.log(recipieCatagoryRankingResult[0]['recipeTitle']);
+            //console.log(recipieCatagoryRankingResult[0]['recipeTitle']);
         } else {
             if (error) {
                 reject(error);
@@ -66,15 +66,15 @@ const getItem = () => (new Promise((resolve, reject) => {
     keyword = "玉ねぎ"
     
     itemSearchUrl = config.url.itemSearch + keyword
-    console.log(itemSearchUrl)
+    //console.log(itemSearchUrl)
    request(encodeURI(itemSearchUrl),(error, response, body) => {
        if (!error && (response && response.statusCode === 200) ) {
            
            const itemList  = body ? JSON.parse(body) : [];
            const itemListItems = itemList['Items'];
            resolve(itemListItems);
-           console.log(itemList['hits']);
-           console.log(itemListItems[0]['Item']['itemName']);
+           //console.log(itemList['hits']);
+           //console.log(itemListItems[0]['Item']['itemName']);
        } else {
            if (error) {
                reject(error);
@@ -100,4 +100,4 @@ module.exports = {
     getItem
 }
 
-console.log(typeof(getItem()))
+//console.log(typeof(getItem()))
