@@ -38,8 +38,8 @@ const getRecipieCatagoryList = () => (new Promise((resolve, reject) => {
 
 
 
-const getRecipieCatagoryRanking = () => (new Promise((resolve, reject) => {
-     foodRecipieUrl = config.url.foodRecipie + "33"
+const getRecipieCatagoryRanking = (id) => (new Promise((resolve, reject) => {
+     foodRecipieUrl = config.url.foodRecipie + id;
     request(foodRecipieUrl,(error, response, body) => {
         if (!error && (response && response.statusCode === 200) ) {
             

@@ -46,7 +46,9 @@ const authenticate =  (req, res, next) => {
 };
 
 //get request to get Recipie Catagory 
-app.get('/api/recipie-catagory-list', authenticate, (req, res) => {
+app.get('/api/recipie-catagory-list',
+//  authenticate,
+ (req, res) => {
     httpRequest.getRecipieCatagoryList()
 
         .then(recipieCatagoryList => {
@@ -60,9 +62,11 @@ app.get('/api/recipie-catagory-list', authenticate, (req, res) => {
 
 
 //get request to get Recipie Catagory Ranking
-app.get('/api/recipie-catagory-ranking', authenticate, (req, res) => {
-    httpRequest.getRecipieCatagoryRanking()
-
+app.get('/api/recipie-catagory-ranking/:categoryId', 
+// authenticate,
+ (req, res) => {
+    const categoryId = req.params.categoryId;
+    httpRequest.getRecipieCatagoryRanking(categoryId)
         .then(recipieCatagoryRanking => {
             res.send(recipieCatagoryRanking)
         })
@@ -73,7 +77,9 @@ app.get('/api/recipie-catagory-ranking', authenticate, (req, res) => {
 });
 
 //get request to search item on Rakuten Ichiba
-app.get('/api/item-search', authenticate, (req, res) => {
+app.get('/api/item-search',
+//  authenticate, 
+ (req, res) => {
     httpRequest.getItem()
         .then(itemList => {
             res.send(itemList)
