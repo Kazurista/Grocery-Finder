@@ -79,10 +79,11 @@ app.get('/api/recipie-catagory-ranking/:categoryId',
 });
 
 //get request to search item on Rakuten Ichiba
-app.get('/api/item-search',
+app.get('/api/item-search/:keyword',
 //  authenticate, 
  (req, res) => {
-    httpRequest.getItem()
+     const keyword = req.params.keyword;
+    httpRequest.getItem(keyword)
         .then(itemList => {
             res.send(itemList)
         })
@@ -123,8 +124,9 @@ app.post('/api/user/signup',UserController.user_signup);
 
 app.post('/api/user/login', UserController.user_login);
 
-app.get("/api/user-getMaterials", (req, res) => {
-    recipieUrl = "https://recipe.rakuten.co.jp/recipe/1940022585/";
+app.get("/api/user-getMaterials/:id", (req, res) => {
+    const id = req.params.id;
+    recipieUrl = "https://recipe.rakuten.co.jp/recipe/"+id +"/";
     GetMaterial.get_materials(recipieUrl)
       .then((materials) => {
         res.send(materials);

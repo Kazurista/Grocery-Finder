@@ -62,8 +62,8 @@ const getRecipieCatagoryRanking = (id) => (new Promise((resolve, reject) => {
     });
 }));
 
-const getItem = () => (new Promise((resolve, reject) => {
-    keyword = "玉ねぎ"
+const getItem = (keyword) => (new Promise((resolve, reject) => {
+    // keyword = "玉ねぎ"
     
     itemSearchUrl = config.url.itemSearch + keyword
     console.log(itemSearchUrl)
