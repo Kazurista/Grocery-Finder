@@ -72,9 +72,9 @@ const getItem = (keyword) => (new Promise((resolve, reject) => {
            
            const itemList  = body ? JSON.parse(body) : [];
            const itemListItems = itemList['Items'];
-           resolve(itemListItems);
-           console.log(itemList['hits']);
-           console.log(itemListItems[0]['Item']['itemName']);
+           resolve({Items: itemListItems});
+        //    console.log(itemList['hits']);
+        //    console.log(itemListItems[0]['Item']['itemName']);
        } else {
            if (error) {
                reject(error);

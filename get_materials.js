@@ -22,7 +22,7 @@ exports.get_materials = (url)  => (new Promise((resolve, reject) =>
                     amounts.push(amount);
                 });
             var materials = [];
-            for (let i = 0; i < names.length; ++i) {
+            for (let i = 0; i < amounts.length; ++i) {
                 materials.push({
                     "name": names[i],
                     "amount": amounts[i]
