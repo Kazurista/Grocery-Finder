@@ -14,6 +14,8 @@ app.use(bodyParser.json());
 const UserController = require('./controllers/user');
 const bcrypt = require('bcrypt');
 
+const GetMaterial = require("./get_materials");
+
 
 mongoose.connect('mongodb+srv://admin:ntMpb3yLMRHIRYxO@cluster0.xkcpi.mongodb.net/userDb?retryWrites=true&w=majority', {
     useUnifiedTopology: true,
@@ -121,6 +123,17 @@ app.post('/api/user/signup',UserController.user_signup);
 
 app.post('/api/user/login', UserController.user_login);
 
+app.get("/api/user-getMaterials", (req, res) => {
+    recipieUrl = "https://recipe.rakuten.co.jp/recipe/1940022585/";
+    GetMaterial.get_materials(recipieUrl)
+      .then((materials) => {
+        res.send(materials);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send();
+      });
+  });
 
 const port = process.env.PORT || config.app.port;
 

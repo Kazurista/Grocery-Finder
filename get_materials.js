@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 
 const my_url = 'https://recipe.rakuten.co.jp/recipe/1940022585/'
 
-get_materials = (url)  => (new Promise((resolve, reject) =>
+exports.get_materials = (url)  => (new Promise((resolve, reject) =>
     axios(url)
         .then(res => {
             console.log("success");
@@ -38,17 +38,16 @@ get_materials = (url)  => (new Promise((resolve, reject) =>
 ));
 
 
-// test
-get_materials(my_url)
-    .then(res => {
-        console.log("get_materials successfully work!");
-        console.log(res);
-    })
-    .catch(err => {
-        console.log("get_materials DO NOT work!");
-        console.log(err);
-    });
-
+// // test
+// get_materials(my_url)
+//     .then(res => {
+//         console.log("get_materials successfully work!");
+//         console.log(res);
+//     })
+//     .catch(err => {
+//         console.log("get_materials DO NOT work!");
+//         console.log(err);
+//     });
 
 
 
